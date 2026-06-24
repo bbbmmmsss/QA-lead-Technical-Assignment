@@ -1,0 +1,31 @@
+name: QA Quality Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Run Unit Tests
+        run: sst bind vitest run
+
+      - name: Coverage Check
+        run: npm run coverage
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build Validation
+        run: npm run build
