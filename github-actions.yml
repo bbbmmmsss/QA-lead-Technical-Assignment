@@ -7,7 +7,7 @@ on:
 
 jobs:
   quality-gate:
-    runs-on: ubuntu-latest
+    runs-on: Windows Latest
 
     steps:
       - uses: actions/checkout@v4
